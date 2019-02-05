@@ -1,4 +1,7 @@
 # Paystackapi :moneybag: :money_with_wings:
+[![CircleCI](https://circleci.com/gh/samuel52/PaystackRubyApi.svg?style=svg)](https://circleci.com/gh/samuel52/PaystackRubyApi)
+
+Paystack gem for Ruby api only application
 ### Installation
 
 Simply add this line to your application's Gemfile:
@@ -27,7 +30,6 @@ require 'dotenv/load'
 ```
 
 ###  Transactions :credit_card:
-
 ###### Verify Payment 
 
 ```ruby
@@ -133,5 +135,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/samuel
 ### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
 
 
