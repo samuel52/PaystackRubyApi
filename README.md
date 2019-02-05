@@ -1,4 +1,4 @@
-# Paystackapi :moneybag: :money_with_wings:
+# Paystackapi :moneybag:
 [![CircleCI](https://circleci.com/gh/samuel52/PaystackRubyApi.svg?style=shield)](https://circleci.com/gh/samuel52/PaystackRubyApi)
 [![Gem Version](https://badge.fury.io/rb/paystackapi.svg)](https://badge.fury.io/rb/paystackapi)
 
@@ -23,7 +23,7 @@ gem install paystackapi
 
 ### Usage
 
-require the gem in your controller file where needed.
+You may need to install [Dotenv](https://github.com/bkeepers/dotenv) to set you environmental variables. Set the requirements in your controller files where needed.
 
 ```ruby
 require 'paystackapi'
@@ -131,11 +131,16 @@ Paystackapi::PaystackSubscription.list_banks #list all Nigerian Banks
 
 ### Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/samuel52/paystackapi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Please feel free to fork this package and contribute by submitting a pull request to enhance the functionalities.
+
+### Who are you?
+
+I'm Sam, find me on [twitter](https://twitter.com/sammyngn).
 
 ### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
 
 
 
