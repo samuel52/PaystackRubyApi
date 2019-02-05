@@ -1,5 +1,5 @@
 # Paystackapi :moneybag: :money_with_wings:
-[![CircleCI](https://circleci.com/gh/samuel52/PaystackRubyApi.svg?style=svg)](https://circleci.com/gh/samuel52/PaystackRubyApi)
+[![CircleCI](https://circleci.com/gh/samuel52/PaystackRubyApi.svg?style=shield)](https://circleci.com/gh/samuel52/PaystackRubyApi)
 
 Paystack gem for Ruby api only application
 ### Installation
@@ -135,6 +135,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/samuel
 ### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
 
 
 
