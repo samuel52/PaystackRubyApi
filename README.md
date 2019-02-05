@@ -1,43 +1,137 @@
-# Paystackapi
+# Paystackapi :moneybag: :money_with_wings:
+Viola!, welcome to Paystack gem for Ruby API application, this gem is meant to be used by absolute beginners to proffesional ruby and non-ruby developers.. The gem was built out of love for Paystack!. If there's a need to contribute, please do.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/paystackapi`. To experiment with that code, run `bin/console` for an interactive prompt.
+### Installation
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
+Simply add this line to your application's Gemfile:
 
 ```ruby
 gem 'paystackapi'
 ```
 
 And then execute:
-
-    $ bundle
+```ruby
+ bundle install
+```
 
 Or install it yourself as:
+```ruby
+gem install paystackapi
+```
 
-    $ gem install paystackapi
+### Usage
 
-## Usage
+require the gem in your controller file where needed.
 
-TODO: Write usage instructions here
+```ruby
+require 'paystackapi'
+require 'dotenv/load'
+```
 
-## Development
+###  Transactions :credit_card:
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+###### Verify Payment 
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
 
-## Contributing
+def validate_payment
+ paystack_ref = params[:reference_code] # get payment ref after initializing payment from the frontend
+ verify = Paystackapi::PaystackTransactions.verify(paystack_ref)
+end
+```
+###### Other Transaction Methods :point_down:
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/paystackapi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+```ruby
+ Paystackapi::PaystackTransactions.list # list all transactions
+ Paystackapi::PaystackTransactions.totals # show transaction totals
+ Paystackapi::PaystackTransactions.list_single(arg) # list single transaction
+ Paystackapi::PaystackTransactions.charge(arg) # charge authorization from card
+```
+### Customers :two_men_holding_hands:
 
-## License
+```ruby
+def customers
+ customerEmail =  params[:customer_email]
+ customer = Paystackapi::PaystackCustomers.create(customerEmail)
+end
+```
+###### Other Customer Methods
+
+```ruby
+ Paystackapi::PaystackCustomers.list #list all customers
+ Paystackapi::PaystackCustomers.list_single(arg) #get by id
+```
+### Plans :cyclone:
+
+```ruby
+def plans
+  createPlan = {
+	CustomerName = params[:name]
+	interval = params[:interval]
+	amount = params[:amount]
+  }
+  customer = Paystackapi::PaystackPlans.create(createPlan)
+end
+```
+###### Other Plans Methods
+
+```ruby
+ Paystackapi::PaystackPlans.list #list all paystack plans
+ Paystackapi::PaystackPlans.list_single(arg) #get by id
+ Paystackapi::PaystackPlans.update(arg) #update plan by id
+ ```
+### Subscription :electric_plug:
+```ruby
+def subscription
+  createSub = {
+	CustomerToken = "CUS_xnxdt6s1zg1f4nx"
+	planCode = "PLN_gx2wn530m0i3w3m"
+  }
+
+customer = Paystackapi::PaystackSubscription.create(createSub)
+end
+```
+###### Other Subcription Methods
+
+```ruby
+ Paystackapi::PaystackSubscription.list #list all subs
+ Paystackapi::PaystackSubscription.list_single(arg) #get subs by id
+ Paystackapi::PaystackSubscription.disable #disable subs
+ Paystackapi::PaystackSubscription.enable #enable subs
+ ```
+### Paystack Transfer :boom:
+```ruby
+def transfer
+  createTrans = {
+   type = "nuban" #use params[:something] to get the parameters from your endpoint
+   name = "Raz"
+   description = "Razite"
+   account_number = "01000000419"
+   bank_code = "044"
+   currency = "NGN"
+  }
+  customer = Paystackapi::PaystackTransfer.generate(createTrans)
+end
+```
+###### Other Transfer Methods
+
+```ruby
+ Paystackapi::PaystackTransfer.list_reciept #list all transfers Reciept
+ Paystackapi::PaystackTransfer.update_reciept(arg, arg) #update reciept 
+ Paystackapi::PaystackTransfer.initailize(arg) #initalize a transfer (triggers an otp here)
+ Paystackapi::PaystackTransfer.list_transfer #list all transfers
+ Paystackapi::PaystackTransfer.finalize(arg) #finalize a transfer
+
+ ```
+### Bank List :bank:
+```ruby
+Paystackapi::PaystackSubscription.list_banks #list all Nigerian Banks
+```
+
+### Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/samuel52/paystackapi. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Paystackapi project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/paystackapi/blob/master/CODE_OF_CONDUCT.md).

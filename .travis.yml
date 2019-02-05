@@ -1,0 +1,16 @@
+sudo: required
+language: ruby
+rvm:
+  - 2.0.0
+  before_install: gem install bundler
+  cache:
+    directories:
+     - vendor/bundle
+
+# script:
+#   - rspec
+
+deploy:
+  provider: rubygems
+  api_key: "b7066e202c6e3d6c5bf39c6502db0e50"
+  gem: paystackapi

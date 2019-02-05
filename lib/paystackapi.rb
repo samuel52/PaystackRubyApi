@@ -1,164 +1,103 @@
-require 'paystackapi/version'
-require 'paystackapi/base.rb'
+require 'paystackapi/core/version'
+require 'paystackapi/core/base.rb'
+require 'paystackapi/core/transaction.rb'
+require 'paystackapi/core/bank.rb'
+require 'paystackapi/core/customer.rb'
+require 'paystackapi/core/otp.rb'
+require 'paystackapi/core/plan.rb'
+require 'paystackapi/core/transfer.rb'
+require 'paystackapi/core/subscription.rb'
 require 'httparty'
-require 'openssl'
 require 'dotenv'
 
 module Paystackapi
 	class PaystackTransactions
-		def self.verify_payment(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}" + "/verify/#{body}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.verify(body)
+			Transaction.verify_payment(body)
 		end
-		def self.list_transactions()
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list
+			Transaction.list_transactions
 		end
-		def self.list_transaction_totals()
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}/" + "totals",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.totals
+			Transaction.list_transaction_totals
 		end
-		def self.fetch_transaction(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}/" + "#{body}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_single(body)
+			Transaction.fetch_transaction(body)
 		end
-		def self.charge_authorization(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}/" + "charge_authorization",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.charge(body)
+			Transaction.charge_authorization(body)
 		end
 	end
 	class PaystackCustomers
-		def self.create_customer(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::CUSTOMER_PATH}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.create(body)
+			Transaction.create_customer(body)
 		end
-		def self.list_customer()
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::CUSTOMER_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list
+			Transaction.list_customer
 		end
-		def self.fetch_a_customer(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::CUSTOMER_PATH}/" + "#{body}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_single(body)
+			Transaction.fetch_a_customer(body)
 		end
 	end
 
 	class PaystackPlans
-		def self.create_plan(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::PLAN_PATH}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.create(body)
+			Transaction.create_plan(body)
 		end
-		def self.list_plans()
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::PLAN_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list
+			Transaction.list_plans
 		end
-		def self.list_single_plan(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::PLAN_PATH}" + "#{body}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_single(body)
+			Transaction.list_single_plan(body)
 		end
-		def self.update_plan(body)
-			api = HTTParty.put("#{API::BASE_URL}" + "#{API::PLAN_PATH}" + "#{body}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.update(body)
+			Transaction.update_plan(body)
 		end
 	end
 
 
 	class PaystackSubscription
-		def self.create_subscription(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::SUBSCRIPTION_PATH}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.create(body)
+			Transaction.create_subscription(body)
 		end
-		def self.list_subscription()
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::SUBSCRIPTION_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list
+			Transaction.list_subscription
 		end
-		def self.list_single_subscription(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::SUBSCRIPTION_PATH}" + "#{body}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_single(body)
+			Transaction.list_single_subscription(body)
 		end
-		def self.disable_subscription()
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::SUBSCRIPTION_PATH}/" + "disable",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.disable
+			Transaction.disable_subscription
 		end
-		def self.enable_subscription()
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::SUBSCRIPTION_PATH}/" + "enable",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.enable
+			Transaction.enable_subscription
 		end
-
 	end
 
 	class PaystackTransfer
-		def self.create_transfer_reciept(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::RECIPIENT_PATH}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.generate(body)
+			Transaction.create_transfer_reciept(body)
 		end
-		def self.list_transfer_reciept(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::RECIPIENT_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_reciept
+			Transaction.list_transfer_reciept
 		end
-		def self.update_transfer_reciept(body, trf_code)
-			api = HTTParty.put("#{API::BASE_URL}" + "#{API::RECIPIENT_PATH}" + "#{trf_code}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.update_reciept(body, trf_code)
+			Transaction.update_transfer_reciept(body)
 		end
-		def self.init_transfer(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::TRANSFER_PATH}",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.initailize(body)
+			Transaction.init_transfer(body)
 		end
-		def self.list_transfers(body)
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSFER_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_transfer
+			Transaction.list_transfers
 		end
-		def self.finalize_transfers(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::TRANSFER_PATH}" + "/finalize_transfer",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.finalize(body)
+			Transaction.finalize_transfers(body)
 		end
-		def self.resend_otp(body)
-			api = HTTParty.post("#{API::BASE_URL}" + "#{API::TRANSFER_PATH}" + "/resend_otp",
-				:body => body.to_json,
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
-		end
-
 	end
 
 	class PaystackBank
-		def self.banks()
-			api = HTTParty.get("#{API::BASE_URL}" + "#{API::BANK_PATH}",
-				:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
-			return api
+		def self.list_banks
+			Transaction.banks
 		end
 	end
 end

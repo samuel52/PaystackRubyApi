@@ -1,15 +1,15 @@
-class Transaction
+module Transaction
 	def self.verify_payment(body)
 		api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}" + "/verify/#{body}",
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api
 	end
-	def self.list_transactions()
+	def self.list_transactions
 		api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}",
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api
 	end
-	def self.list_transaction_totals()
+	def self.list_transaction_totals
 		api = HTTParty.get("#{API::BASE_URL}" + "#{API::TRANSACTION_PATH}/" + "totals",
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api
@@ -24,5 +24,5 @@ class Transaction
 			:body => body.to_json,
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api
-	end
+	end 
 end
