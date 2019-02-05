@@ -1,6 +1,5 @@
 # Paystackapi :moneybag: :money_with_wings:
-Viola!, welcome to Paystack gem for Ruby API application, this gem is meant to be used by absolute beginners to proffesional ruby and non-ruby developers.. The gem was built out of love for Paystack!. If there's a need to contribute, please do.
-
+![Gem Version](https://badge.fury.io/rb/paystack.svg)](https://badge.fury.io/rb/paystackapi)
 ### Installation
 
 Simply add this line to your application's Gemfile:
@@ -135,3 +134,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/samuel
 ### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
