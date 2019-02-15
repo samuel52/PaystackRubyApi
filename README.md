@@ -111,7 +111,7 @@ def transfer
    bank_code = "044"
    currency = "NGN"
   }
-  customer = Paystackapi::PaystackTransfer.generate(createTrans)
+  transfer = Paystackapi::PaystackTransfer.generate(createTrans)
 end
 ```
 ###### Other Transfer Methods
@@ -126,7 +126,7 @@ end
  ```
 ### Bank List :bank:
 ```ruby
-Paystackapi::PaystackSubscription.list_banks #list all Nigerian Banks
+Paystackapi::PaystackBank.list_banks #list all Nigerian Banks
 ```
 
 ### Contributing
@@ -140,5 +140,6 @@ I'm Sam, find me on [twitter](https://twitter.com/sammyngn).
 ### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
 
 

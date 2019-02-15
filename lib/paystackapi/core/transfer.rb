@@ -11,7 +11,7 @@ module Transfer
 		return api
 	end
 	def self.update_transfer_reciept(body, trf_code)
-		api = HTTParty.put("#{API::BASE_URL}" + "#{API::RECIPIENT_PATH}" + "#{trf_code}",
+		api = HTTParty.put("#{API::BASE_URL}" + "#{API::RECIPIENT_PATH}/" + "#{trf_code}",
 			:body => body.to_json,
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api

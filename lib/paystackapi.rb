@@ -30,74 +30,74 @@ module Paystackapi
 	end
 	class PaystackCustomers
 		def self.create(body)
-			Transaction.create_customer(body)
+			Customer.create_customer(body)
 		end
 		def self.list
-			Transaction.list_customer
+			Customer.list_customer
 		end
 		def self.list_single(body)
-			Transaction.fetch_a_customer(body)
+			Customer.fetch_a_customer(body)
 		end
 	end
 
 	class PaystackPlans
 		def self.create(body)
-			Transaction.create_plan(body)
+			Plan.create_plan(body)
 		end
 		def self.list
-			Transaction.list_plans
+			Plan.list_plans
 		end
 		def self.list_single(body)
-			Transaction.list_single_plan(body)
+			Plan.list_single_plan(body)
 		end
-		def self.update(body)
-			Transaction.update_plan(body)
+		def self.update(body, plan)
+			Plan.update_plan(body, plan)
 		end
 	end
 
 
 	class PaystackSubscription
 		def self.create(body)
-			Transaction.create_subscription(body)
+			Subscription.create_subscription(body)
 		end
 		def self.list
-			Transaction.list_subscription
+			Subscription.list_subscription
 		end
 		def self.list_single(body)
-			Transaction.list_single_subscription(body)
+			Subscription.list_single_subscription(body)
 		end
-		def self.disable
-			Transaction.disable_subscription
+		def self.disable(body)
+			Subscription.disable_subscription(body)
 		end
-		def self.enable
-			Transaction.enable_subscription
+		def self.enable(body)
+			Subscription.enable_subscription(body)
 		end
 	end
 
 	class PaystackTransfer
 		def self.generate(body)
-			Transaction.create_transfer_reciept(body)
+			Transfer.create_transfer_reciept(body)
 		end
 		def self.list_reciept
-			Transaction.list_transfer_reciept
+			Transfer.list_transfer_reciept
 		end
 		def self.update_reciept(body, trf_code)
-			Transaction.update_transfer_reciept(body)
+			Transfer.update_transfer_reciept(body, trf_code)
 		end
 		def self.initailize(body)
-			Transaction.init_transfer(body)
+			Transfer.init_transfer(body)
 		end
 		def self.list_transfer
-			Transaction.list_transfers
+			Transfer.list_transfers
 		end
 		def self.finalize(body)
-			Transaction.finalize_transfers(body)
+			Transfer.finalize_transfers(body)
 		end
 	end
 
 	class PaystackBank
 		def self.list_banks
-			Transaction.banks
+			Bank.banks
 		end
 	end
 end

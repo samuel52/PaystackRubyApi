@@ -15,8 +15,8 @@ module Plan
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api
 	end
-	def self.update_plan(body)
-		api = HTTParty.put("#{API::BASE_URL}" + "#{API::PLAN_PATH}" + "#{body}",
+	def self.update_plan(body, plan)
+		api = HTTParty.put("#{API::BASE_URL}" + "#{API::PLAN_PATH}/" + "#{plan}",
 			:body => body.to_json,
 			:headers => { "Authorization"=> ENV["PAYSTACK_SECRET_KEY"], "content-type" => "application/json"})
 		return api
